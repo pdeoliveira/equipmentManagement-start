@@ -1,0 +1,26 @@
+{
+  "equipmentManagementApp": {
+    "store": {
+      "home": {
+        "title": "Stores",
+        "createLabel": "Criar novo Store",
+        "createOrEditLabel": "Criar ou editar Store",
+        "notFound": "Nenhum Store encontrado"
+      },
+      "created": "Um novo Store foi criado com o identificador {{ param }}",
+      "updated": "Um Store foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Store foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Store {{ id }}?"
+      },
+      "detail": {
+        "title": "Store"
+      },
+      "storeName": "Store Name",
+      "streetAddress": "Street Address",
+      "postalCode": "Postal Code",
+      "city": "City",
+      "stateProvince": "State Province"
+    }
+  }
+}

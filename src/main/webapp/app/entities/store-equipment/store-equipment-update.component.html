@@ -1,0 +1,82 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-store-equipment-heading" jhiTranslate="equipmentManagementApp.storeEquipment.home.createOrEditLabel">Create or edit a Store Equipment</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="equipmentManagementApp.storeEquipment.sku" for="field_sku">Sku</label>
+                    <input type="number" class="form-control" name="sku" id="field_sku"
+                           formControlName="sku"/>
+                    <div *ngIf="editForm.get('sku')!.invalid && (editForm.get('sku')!.dirty || editForm.get('sku')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('sku')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('sku')?.errors?.min" jhiTranslate="entity.validation.min" [translateValues]="{ min: 0 }">
+                            This field should be at least 0.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('sku')?.errors?.max" jhiTranslate="entity.validation.max" [translateValues]="{ max: 9999999 }">
+                            This field cannot be more than 9999999.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('sku')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="equipmentManagementApp.storeEquipment.equipmentName" for="field_equipmentName">Equipment Name</label>
+                    <input type="text" class="form-control" name="equipmentName" id="field_equipmentName"
+                           formControlName="equipmentName"/>
+                    <div *ngIf="editForm.get('equipmentName')!.invalid && (editForm.get('equipmentName')!.dirty || editForm.get('equipmentName')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('equipmentName')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="equipmentManagementApp.storeEquipment.locationInStore" for="field_locationInStore">Location In Store</label>
+                    <input type="text" class="form-control" name="locationInStore" id="field_locationInStore"
+                           formControlName="locationInStore"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="equipmentManagementApp.storeEquipment.store" for="field_store">Store</label>
+                    <select class="form-control" id="field_store" name="store" formControlName="store">
+                        <option *ngIf="!editForm.get('store')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="storeOption.id === editForm.get('store')!.value?.id ? editForm.get('store')!.value : storeOption" *ngFor="let storeOption of stores; trackBy: trackById">{{ storeOption.storeName }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('store')!.invalid && (editForm.get('store')!.dirty || editForm.get('store')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('store')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

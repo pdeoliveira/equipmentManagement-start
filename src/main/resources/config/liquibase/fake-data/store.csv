@@ -1,0 +1,7 @@
+id;store_name;street_address;postal_code;city;state_province
+1;ACME Leblon;Avenida Visconde de Albuquerque, 490;22450000;Rio de Janeiro;RJ
+2;ACME Barra;Avenida das Américas, 8501;22793081;Rio de Janeiro;RJ
+3;ACME Freguesia;Estrada dos Três Rios, 300;22745005;Rio de Janeiro;RJ
+4;ACME São Conrado;Estrada da Gávea, 701;22610001;Rio de Janeiro;RJ
+5;ACME Copacabana;Avenida Nossa Senhora de Copacabana, 57;22060001;Rio de Janeiro;RJ
+6;ACME Leme;Rua Gustavo Sampaio, 112;22010011;Rio de Janeiro;RJ

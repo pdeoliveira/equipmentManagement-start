@@ -1,0 +1,49 @@
+{
+  "name": "StoreEquipment",
+  "fields": [
+    {
+      "fieldName": "sku",
+      "fieldType": "Long",
+      "fieldValidateRules": [
+        "required",
+        "unique",
+        "min",
+        "max"
+      ],
+      "fieldValidateRulesMin": "0",
+      "fieldValidateRulesMax": "9999999"
+    },
+    {
+      "fieldName": "equipmentName",
+      "fieldType": "String",
+      "fieldValidateRules": [
+        "required"
+      ]
+    },
+    {
+      "fieldName": "locationInStore",
+      "fieldType": "String"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "store",
+      "otherEntityRelationshipName": "storeEquipment",
+      "relationshipValidateRules": "required",
+      "relationshipName": "store",
+      "otherEntityField": "storeName"
+    }
+  ],
+  "changelogDate": "20201204230339",
+  "entityTableName": "store_equipment",
+  "dto": "no",
+  "pagination": "infinite-scroll",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

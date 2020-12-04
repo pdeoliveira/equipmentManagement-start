@@ -1,0 +1,11 @@
+id;sku;equipment_name;location_in_store;store_id
+1;5316464;Ar Condicionado 1;Frente;1
+2;738413;Ar Condicionado 1;Lateral Direita;2
+3;2750797;Ar Condicionado Central;Fundos;3
+4;9854417;Geladeira 1;Lateral Esquerda;4
+5;3524867;Ar Condicionado Central;Fundos;5
+6;2486636;Ar Condicionado Central;Fundos;6
+7;6430395;Gerador 1;Fundos;1
+8;3931659;Geladeira 1;Lateral Direita;1
+9;5108255;Ar Condicionado 2;Lateral Direita;1
+10;7758428;Geladeira 1;Lateral Esquerda;2

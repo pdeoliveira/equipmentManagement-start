@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="store">
+            <h2><span jhiTranslate="equipmentManagementApp.store.detail.title">Store</span> {{ store.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="equipmentManagementApp.store.storeName">Store Name</span></dt>
+                <dd>
+                    <span>{{ store.storeName }}</span>
+                </dd>
+                <dt><span jhiTranslate="equipmentManagementApp.store.streetAddress">Street Address</span></dt>
+                <dd>
+                    <span>{{ store.streetAddress }}</span>
+                </dd>
+                <dt><span jhiTranslate="equipmentManagementApp.store.postalCode">Postal Code</span></dt>
+                <dd>
+                    <span>{{ store.postalCode }}</span>
+                </dd>
+                <dt><span jhiTranslate="equipmentManagementApp.store.city">City</span></dt>
+                <dd>
+                    <span>{{ store.city }}</span>
+                </dd>
+                <dt><span jhiTranslate="equipmentManagementApp.store.stateProvince">State Province</span></dt>
+                <dd>
+                    <span>{{ store.stateProvince }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/store', store.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

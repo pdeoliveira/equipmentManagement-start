@@ -1,0 +1,25 @@
+{
+  "equipmentManagementApp": {
+    "storeEquipment": {
+      "home": {
+        "title": "Store Equipments",
+        "createLabel": "Create a new Store Equipment",
+        "createOrEditLabel": "Create or edit a Store Equipment",
+        "notFound": "No Store Equipments found"
+      },
+      "created": "A new Store Equipment is created with identifier {{ param }}",
+      "updated": "A Store Equipment is updated with identifier {{ param }}",
+      "deleted": "A Store Equipment is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Store Equipment {{ id }}?"
+      },
+      "detail": {
+        "title": "Store Equipment"
+      },
+      "sku": "Sku",
+      "equipmentName": "Equipment Name",
+      "locationInStore": "Location In Store",
+      "store": "Store"
+    }
+  }
+}

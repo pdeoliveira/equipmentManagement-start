@@ -1,0 +1,44 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="storeEquipment">
+            <h2><span jhiTranslate="equipmentManagementApp.storeEquipment.detail.title">Store Equipment</span> {{ storeEquipment.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="equipmentManagementApp.storeEquipment.sku">Sku</span></dt>
+                <dd>
+                    <span>{{ storeEquipment.sku }}</span>
+                </dd>
+                <dt><span jhiTranslate="equipmentManagementApp.storeEquipment.equipmentName">Equipment Name</span></dt>
+                <dd>
+                    <span>{{ storeEquipment.equipmentName }}</span>
+                </dd>
+                <dt><span jhiTranslate="equipmentManagementApp.storeEquipment.locationInStore">Location In Store</span></dt>
+                <dd>
+                    <span>{{ storeEquipment.locationInStore }}</span>
+                </dd>
+                <dt><span jhiTranslate="equipmentManagementApp.storeEquipment.store">Store</span></dt>
+                <dd>
+                    <div *ngIf="storeEquipment.store">
+                        <a [routerLink]="['/store', storeEquipment.store?.id, 'view']">{{ storeEquipment.store?.storeName }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/store-equipment', storeEquipment.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="equipmentManagementApp.storeEquipment.home.title">Store Equipments</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-store-equipment" [routerLink]="['/store-equipment/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="equipmentManagementApp.storeEquipment.home.createLabel">
+            Create a new Store Equipment
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="storeEquipments?.length === 0">
+        <span jhiTranslate="equipmentManagementApp.storeEquipment.home.notFound">No storeEquipments found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="storeEquipments && storeEquipments.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="sku"><span jhiTranslate="equipmentManagementApp.storeEquipment.sku">Sku</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="equipmentName"><span jhiTranslate="equipmentManagementApp.storeEquipment.equipmentName">Equipment Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="locationInStore"><span jhiTranslate="equipmentManagementApp.storeEquipment.locationInStore">Location In Store</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="store.storeName"><span jhiTranslate="equipmentManagementApp.storeEquipment.store">Store</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+                <tr *ngFor="let storeEquipment of storeEquipments ;trackBy: trackId">
+                    <td><a [routerLink]="['/store-equipment', storeEquipment.id, 'view']">{{ storeEquipment.id }}</a></td>
+                    <td>{{ storeEquipment.sku }}</td>
+                    <td>{{ storeEquipment.equipmentName }}</td>
+                    <td>{{ storeEquipment.locationInStore }}</td>
+                    <td>
+                        <div *ngIf="storeEquipment.store">
+                            <a [routerLink]="['/store', storeEquipment.store?.id, 'view']" >{{ storeEquipment.store?.storeName }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/store-equipment', storeEquipment.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/store-equipment', storeEquipment.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(storeEquipment)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <button type="button" (click)="loadPage(page+1)" class="btn btn-primary btn-sm"><span class="d-none d-md-inline">Mostrar mais resultados</span></button>
+    </div>
+</div>
