@@ -1,0 +1,23 @@
+entity Store {
+	storeName String required
+	streetAddress String
+	postalCode String minlength(5) maxlength(8) pattern(/[0-9]+/)
+	city String
+	stateProvince String
+}
+
+entity StoreEquipment {
+	sku Long required unique min(0) max(9999999)
+	equipmentName String required
+	locationInStore String
+}
+
+relationship ManyToOne {
+	StoreEquipment{store(storeName) required} to Store
+}
+
+paginate StoreEquipment with infinite-scroll
+paginate Store with pagination
+
+service all with serviceClass
+filter all
