@@ -1,6 +1,13 @@
 # equipmentManagement
 
-This application was generated using JHipster 6.10.5, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v6.10.5](https://www.jhipster.tech/documentation-archive/v6.10.5).
+This application is a base for assessing the capabilities of fullstack programmer candidates. It's a simple 
+equipment management app for ACME store chain.
+
+The technology stack uses Angular 10 with Bootstrap 4.5, Sass/CSS and webpack (web frontend), Java 11 with 
+Spring Boot 22.7, Hibernate 5.4.15, Liquibase 3.9 and Maven (backend) to provide the core implementation 
+for a end-to-end web application.
+
+Below is the core information required for development:
 
 ## Development
 
@@ -28,61 +35,20 @@ auto-refreshes when files change on your hard drive.
 
 npm start
 ```
+These commands, together will enable browsersync, so when you change a file in the frontend layer (Angular, CSS, etc.), 
+the browser automatically updates with the changes. The app will run at:
+```
+http://localhost:9000
+```
+For backend code, such as Java, you need to re-compile using an editor such as IntelliJ, or in a separate terminal, run:
+```
+./mvnw compile
+```
+And the server will update with browsersync still running.
 
-Npm is also used to manage CSS and JavaScript dependencies used in this application. You can upgrade dependencies by
-specifying a newer version in [package.json](package.json). You can also run `npm update` and `npm install` to manage dependencies.
-Add the `help` flag on any command to see how you can use it. For example, `npm help update`.
+Npm is also used to manage CSS and JavaScript dependencies used in this application.
 
 The `npm run` command will list all of the scripts available to run for this project.
-
-### PWA Support
-
-JHipster ships with PWA (Progressive Web App) support, and it's turned off by default. One of the main components of a PWA is a service worker.
-
-The service worker initialization code is commented out by default. To enable it, uncomment the following code in `src/main/webapp/index.html`:
-
-```html
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./service-worker.js').then(function () {
-      console.log('Service Worker Registered');
-    });
-  }
-</script>
-```
-
-Note: [Workbox](https://developers.google.com/web/tools/workbox/) powers JHipster's service worker. It dynamically generates the `service-worker.js` file.
-
-### Managing dependencies
-
-For example, to add [Leaflet][] library as a runtime dependency of your application, you would run following command:
-
-```
-npm install --save --save-exact leaflet
-```
-
-To benefit from TypeScript type definitions from [DefinitelyTyped][] repository in development, you would run following command:
-
-```
-npm install --save-dev --save-exact @types/leaflet
-```
-
-Then you would import the JS and CSS files specified in library's installation instructions so that [Webpack][] knows about them:
-Edit [src/main/webapp/app/vendor.ts](src/main/webapp/app/vendor.ts) file:
-
-```
-import 'leaflet/dist/leaflet.js';
-```
-
-Edit [src/main/webapp/content/scss/vendor.scss](src/main/webapp/content/scss/vendor.scss) file:
-
-```
-@import '~leaflet/dist/leaflet.css';
-```
-
-Note: There are still a few other things remaining to do for Leaflet that we won't detail here.
-
-For further instructions on how to develop with JHipster, have a look at [Using JHipster in development][].
 
 ### Using Angular CLI
 
@@ -102,44 +68,6 @@ create src/main/webapp/app/my-component/my-component.component.ts
 update src/main/webapp/app/app.module.ts
 ```
 
-## Building for production
-
-### Packaging as jar
-
-To build the final jar and optimize the equipmentManagement application for production, run:
-
-```
-
-./mvnw -Pprod clean verify
-
-
-```
-
-This will concatenate and minify the client CSS and JavaScript files. It will also modify `index.html` so it references these new files.
-To ensure everything worked, run:
-
-```
-
-java -jar target/*.jar
-
-
-```
-
-Then navigate to [http://localhost:8080](http://localhost:8080) in your browser.
-
-Refer to [Using JHipster in production][] for more details.
-
-### Packaging as war
-
-To package your application as a war in order to deploy it to an application server, run:
-
-```
-
-./mvnw -Pprod,war clean verify
-
-
-```
-
 ## Testing
 
 To launch your application's tests, run:
@@ -147,10 +75,15 @@ To launch your application's tests, run:
 ```
 ./mvnw verify
 ```
+or, if you want a clean rebuild and test, run:
+```
+./mvnw clean verify
+```
 
 ### Client tests
 
-Unit tests are run by [Jest][] and written with [Jasmine][]. They're located in [src/test/javascript/](src/test/javascript/) and can be run with:
+Unit tests are run by [Jest][] and written with [Jasmine][]. They're located in 
+[src/test/javascript/](src/test/javascript/) and can be run with:
 
 ```
 npm test
@@ -158,80 +91,35 @@ npm test
 
 For more information, refer to the [Running tests page][].
 
-### Code quality
+## Database
 
-Sonar is used to analyse code quality. You can start a local Sonar server (accessible on http://localhost:9001) with:
-
+This project uses H2 with disk-based persistence database in development, so you will have an in-memory database 
+running, and you can access its console at:
 ```
-docker-compose -f src/main/docker/sonar.yml up -d
+http://localhost:8080/h2-console
 ```
+We use Liquibase to manage the database updates, and stores its configuration in the 
+[src/main/resources/config/liquibase/](src/main/resources/config/liquibase/) directory.
 
-You can run a Sonar analysis with using the [sonar-scanner](https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner) or by using the maven plugin.
+If you need the clean/delete the database (recreating it on the next run), just delete the .db files at target/h2db/db/.
 
-Then, run a Sonar analysis:
+## Internationalization
 
-```
-./mvnw -Pprod clean verify sonar:sonar
-```
+Internationalization (or i18n) is set up at the beginning of your project (and not as an afterthought).
+   
+Usage is as follows:
+   
+With Angular, thanks to NG2 translate and a specific JHipster component, which uses JSON files for translation
 
-If you need to re-run the Sonar phase, please be sure to specify at least the `initialize` phase since Sonar properties are loaded from the sonar-project.properties file.
+For example, to add a translation to the “first name” field, add a “translate” attribute with a key: 
+<label jhiTranslate="settings.form.firstname">First Name</label>
+   
+This key references a JSON document, which will return the translated String. Angular/React will then replace 
+the “First Name” String with the translated version.
 
-```
-./mvnw initialize sonar:sonar
-```
-
-For more information, refer to the [Code quality page][].
-
-## Using Docker to simplify development (optional)
-
-You can use Docker to improve your JHipster development experience. A number of docker-compose configuration are available in the [src/main/docker](src/main/docker) folder to launch required third party services.
-
-For example, to start a mysql database in a docker container, run:
-
-```
-docker-compose -f src/main/docker/mysql.yml up -d
-```
-
-To stop it and remove the container, run:
-
-```
-docker-compose -f src/main/docker/mysql.yml down
-```
-
-You can also fully dockerize your application and all the services that it depends on.
-To achieve this, first build a docker image of your app by running:
-
-```
-./mvnw -Pprod verify jib:dockerBuild
-```
-
-Then run:
-
-```
-docker-compose -f src/main/docker/app.yml up -d
-```
-
-For more information refer to [Using Docker and Docker-Compose][], this page also contains information on the docker-compose sub-generator (`jhipster docker-compose`), which is able to generate docker configurations for one or several JHipster applications.
-
-## Continuous Integration (optional)
-
-To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`), this will let you generate configuration files for a number of Continuous Integration systems. Consult the [Setting up Continuous Integration][] page for more information.
-
-[jhipster homepage and latest documentation]: https://www.jhipster.tech
-[jhipster 6.10.5 archive]: https://www.jhipster.tech/documentation-archive/v6.10.5
-[using jhipster in development]: https://www.jhipster.tech/documentation-archive/v6.10.5/development/
-[using docker and docker-compose]: https://www.jhipster.tech/documentation-archive/v6.10.5/docker-compose
-[using jhipster in production]: https://www.jhipster.tech/documentation-archive/v6.10.5/production/
-[running tests page]: https://www.jhipster.tech/documentation-archive/v6.10.5/running-tests/
-[code quality page]: https://www.jhipster.tech/documentation-archive/v6.10.5/code-quality/
-[setting up continuous integration]: https://www.jhipster.tech/documentation-archive/v6.10.5/setting-up-ci/
 [node.js]: https://nodejs.org/
 [yarn]: https://yarnpkg.org/
 [webpack]: https://webpack.github.io/
 [angular cli]: https://cli.angular.io/
 [browsersync]: https://www.browsersync.io/
 [jest]: https://facebook.github.io/jest/
-[jasmine]: https://jasmine.github.io/2.0/introduction.html
-[protractor]: https://angular.github.io/protractor/
-[leaflet]: https://leafletjs.com/
-[definitelytyped]: https://definitelytyped.org/
